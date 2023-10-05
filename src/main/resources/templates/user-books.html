@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User Books</title>
+</head>
+<body>
+<h1>User Books</h1>
+
+<!-- Список уже добавленных книг -->
+<h2>Список уже добавленных книг:</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Назва книги</th>
+    <th>Автор</th>
+    <th>Жанр</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${userBooks}">
+    <td th:text="${book.name}"></td>
+    <td th:text="${book.author}"></td>
+    <td th:text="${book.jenre}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

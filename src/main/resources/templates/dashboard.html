@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+<h1>Welcome to the Dashboard</h1>
+<p>Ім'я : <span th:text="${user.name}"></span></p>
+<p>Email: <span th:text="${user.email}"></span></p>
+<p>Телефон: <span th:text="${user.phone}"></span></p>
+<p>Місто: <span th:text="${user.city}"></span></p>
+
+<a href="user-books" class="button">Перейти до списку книг-користувача</a>
+
+<a href="newBook" class="button">Перейти до створення нової книги</a>
+
+</body>
+</html>

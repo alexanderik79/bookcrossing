@@ -16,4 +16,12 @@ public class UserService {
         System.out.println(user);
         return userRepository.save(user);
     }
+
+    public User getUserById (long id){
+        return userRepository.getOne(id);
+    }
+
+    public User getUserByLogin (String login){
+        return userRepository.findByLogin(login);
+    }
 }

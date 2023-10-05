@@ -10,8 +10,4 @@ public class IndexController {
     public String index() {
         return "index";
     }
-    @PostMapping("login.html")
-    public String login() {
-        return "login";
-    }
 }
