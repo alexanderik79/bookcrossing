@@ -1,19 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вкладки</title>
+  <style>
+    .tab {
+      display: none;
+    }
+
+    .tabs {
+      text-align: center;
+    }
+
+    .tabs button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .tabs button:hover {
+      background-color: #08417c;
+    }
+  </style>
 </head>
 <body>
-<h1>Welcome to the Dashboard</h1>
-<p>Ім'я : <span th:text="${user.name}"></span></p>
-<p>Email: <span th:text="${user.email}"></span></p>
-<p>Телефон: <span th:text="${user.phone}"></span></p>
-<p>Місто: <span th:text="${user.city}"></span></p>
 
-<a href="user-books" class="button">Перейти до списку книг-користувача</a>
+<p10>Ім'я : <span th:text="${user.name}"></span></p10>
+<p10>Email: <span th:text="${user.email}"></span></p10>
+<p10>Телефон: <span th:text="${user.phone}"></span></p10>
+<p10>Місто: <span th:text="${user.city}"></span></p10>
 
-<a href="newBook" class="button">Перейти до створення нової книги</a>
+<hr>
+<div class="tabs">
+  <button onclick="openTab('tab1')">Список моїх книжок</button>
+  <button onclick="openTab('tab2')">Бібліотека</button>
+  <button onclick="openTab('tab3')">Список запросів моїх книжок</button>
+  <hr>
+</div>
 
+<div id="tab1" class="tab">
+  <h4>Добавити нову книжку</h4>
+  <form action="#" method="POST">
+    <label for="author">Автор:</label>
+    <input type="text" id="author" name="author" required>
+
+    <label for="genre">Жанр:</label>
+    <select id="genre" name="genre" required>
+      <option value="Фантастика">Фантастика</option>
+      <option value="Детектив">Детектив</option>
+      <option value="Роман">Роман</option>
+      <option value="Історичний">Історичний</option>
+      <option value="Пригоди">Пригоди</option>
+    </select>
+
+    <label for="title">Назва:</label>
+    <input type="text" id="title" name="title" required>
+
+    <input type="submit" value="+">
+  </form>
+  <hr>
+  <h4>Список моїх книжок</h4>
+
+</div>
+
+<div id="tab2" class="tab">
+  <h4>Пошук книги</h4>
+  <form>
+    <label for="author">Автор:</label>
+    <input type="text" id="author" name="author">
+
+    <label for="genre">Жанр:</label>
+    <select id="genre" name="genre">
+      <option value=""></option>
+      <option value="Фантастика">Фантастика</option>
+      <option value="Детектив">Детектив</option>
+      <option value="Роман">Роман</option>
+      <option value="Історичний">Історичний</option>
+      <option value="Пригоди">Пригоди</option>
+      <!-- Додайте інші варіанти жанрів, які вам потрібні -->
+    </select>
+
+    <label for="title">Назва:</label>
+    <input type="text" id="title" name="title">
+
+    <input type="submit" value="🔍">
+  </form>
+  <hr>
+
+  <iframe src="books.html" width="100%" height="300"></iframe>
+
+</div>
+
+<div id="tab3" class="tab">
+  <h2>Вкладка 3</h2>
+  <p>Вміст вкладки 3 тут.</p>
+</div>
+
+<script>
+  function openTab(tabName) {
+    var tabs = document.getElementsByClassName("tab");
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].style.display = "none";
+    }
+    document.getElementById(tabName).style.display = "block";
+  }
+</script>
 </body>
 </html>

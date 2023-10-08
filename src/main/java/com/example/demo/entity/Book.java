@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @Data
 @Entity
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +23,8 @@ public class Book {
     private String author;
     @Column(name = "jenre")
     private String jenre;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Transient

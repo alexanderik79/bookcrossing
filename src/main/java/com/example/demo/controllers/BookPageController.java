@@ -16,7 +16,6 @@ import java.util.List;
 public class BookPageController {
     private final AdminService adminService;
     private final BookService bookService;
-
     private final BookRepository bookRepository;
 
     @Autowired
@@ -28,8 +27,8 @@ public class BookPageController {
 
     @GetMapping("/books")
     public String getAllBooks(Model model) {
-        List<Book> listOfBooks = adminService.getALLbooks();
-        model.addAttribute("book", listOfBooks);
+        List<Book> listOfBooks = bookService.getAllBooks();
+        model.addAttribute("books", listOfBooks);
         return "books";
     }
 
@@ -65,7 +64,6 @@ public class BookPageController {
         // Перенаправить пользователя на страницу, где можно увидеть добавленную книгу
         return "redirect:/user-books";
     }
-
 
     @GetMapping("/books/{id}")
     public ResponseEntity getBookByID(@PathVariable Long id) {

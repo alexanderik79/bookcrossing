@@ -18,5 +18,4 @@ public class AdminPageController {
     public String adminPage() {
         return "adminpage";
     }
-
 }

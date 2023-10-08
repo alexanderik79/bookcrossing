@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "users")
@@ -22,4 +24,6 @@ public class User {
     private String phone;
     @Column(name = "city")
     private String city;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Book> orders;
 }
