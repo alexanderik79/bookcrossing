@@ -27,7 +27,7 @@ public class User {
     @Column(name = "city")
     private String city;
     @ManyToOne
-    Book book;
+    private Book book;
 
 
 }
