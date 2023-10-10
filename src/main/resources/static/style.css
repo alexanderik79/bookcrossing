@@ -1,0 +1,68 @@
+
+table {
+    border-collapse: collapse; /* Объединение границ ячеек */
+    width: 100%; /* Ширина таблицы */
+}
+th, td {
+    border: 1px solid black; /* Границы для заголовков и ячеек */
+    padding: 8px; /* Отступ внутри ячеек */
+    text-align: left; /* Выравнивание текста в ячейках */
+}
+th {
+    background-color: #2a79d2; /* Цвет фона для заголовков */
+}
+tr:nth-child(even) {
+    background-color: #80b2e1; /* Цвет фона для четных строк */
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 80%; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера по горизонтали */
+    margin-top: 10%; /* Добавление отступа сверху, если нужно */
+}
+
+.container2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 80%; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера по горизонтали */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 10px; /* Добавление отступа сверху, если нужно */
+}
+
+
+.button:hover {
+    background-color: #0056b3;
+}
+input[type="text"], input[type="password"], input[type="text"], input[type="email"],
+input[type="tel"], input[type="city"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 260px;
+}

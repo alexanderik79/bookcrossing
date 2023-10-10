@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-
 </head>
 <body>
 <div class="container">
@@ -12,20 +11,16 @@
     <tr>
         <th>№</th>
         <th>Назва</th>
-        <th>Жанр</th>
         <th>Автор</th>
-        <th>id власника</th>
+<!--        <th>Власник</th>-->
 <!--        <th>Телефон власника</th>-->
-        <th>Власник</th>
     </tr>
     <tr th:each="book : ${books}">
         <td><span th:text="${book.id}"></span></td>
         <td><span th:text="${book.name}"></span></td>
-        <td><span th:text="${book.jenre}"></span></td>
         <td><span th:text="${book.author}"></span></td>
-        <td><span th:text="${book.user.getId()}"></span></td>
+<!--        <td><span th:text="${book.user.getId()}"></span></td>-->
 <!--        <td><span th:text="${book.user.getPhone()}"></span></td>-->
-        <td><a th:href="@{/user(id=${book.user.getId()})}" class="href">Власник</a></td>
     </tr>
 </table>
 </div>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body>
+<div class="container">
+    <h3>Додати книгу</h3>
+
+    <form action="#" th:action="@{/newbook}" th:object="${book}" method="post">
+        <div class="form-group">
+            <label for="name">Назва:</label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Name" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Автор:</label>
+            <input type="text" th:field="*{author}" id="author" placeholder="Author" required>
+        </div>
+
+        <button type="submit" class="button">Додати</button>
+    </form>
+</div>
+</body>
+</html>

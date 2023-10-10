@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "dashboard/books.html")
 @Controller
 public class BookPageController {
     private final AdminService adminService;
@@ -36,7 +37,7 @@ public class BookPageController {
     @GetMapping("/newBook")
     public String showAddBookForm(Model model) {
         // Логика отображения формы для создания новой книги
-        return "newBook"; // Возвращает имя представления для формы
+        return "newbook"; // Возвращает имя представления для формы
     }
 
     @ModelAttribute("newBook")
