@@ -21,10 +21,11 @@ public class NewBookController {
     @GetMapping("/newbook")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
-        return "newbook";
+        return "newbooks";
     }
     @PostMapping("/newbook")
-    public String saveUser(@ModelAttribute("book") Book book) {
+//    public String saveBook (@ModelAttribute("book") Book book) {
+    public String addNewBook(@ModelAttribute Book book) {
         bookService.saveBook(book);
         return "redirect:/dashboard";
     }

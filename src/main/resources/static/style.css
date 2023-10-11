@@ -59,7 +59,7 @@ body {
 .button:hover {
     background-color: #0056b3;
 }
-input[type="text"], input[type="password"], input[type="text"], input[type="email"],
+input[type="text"], input[type="password"], input[type="email"],
 input[type="tel"], input[type="city"] {
     padding: 10px;
     border: 1px solid #ccc;

@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "dashboard/books.html")
+
 @Controller
-public class BookPageController {
+public class BooksController {
     private final AdminService adminService;
     private final BookService bookService;
     private final BookRepository bookRepository;
 
     @Autowired
-    public BookPageController(AdminService adminService, BookService bookService, BookRepository bookRepository) {
+    public BooksController(AdminService adminService, BookService bookService, BookRepository bookRepository) {
         this.adminService = adminService;
         this.bookService = bookService;
         this.bookRepository = bookRepository;
@@ -37,7 +37,7 @@ public class BookPageController {
     @GetMapping("/newBook")
     public String showAddBookForm(Model model) {
         // Логика отображения формы для создания новой книги
-        return "newbook"; // Возвращает имя представления для формы
+        return "newbooks"; // Возвращает имя представления для формы
     }
 
     @ModelAttribute("newBook")
