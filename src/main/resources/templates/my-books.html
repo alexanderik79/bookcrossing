@@ -12,15 +12,13 @@
         <th>№</th>
         <th>Назва</th>
         <th>Автор</th>
-<!--        <th>Власник</th>-->
-<!--        <th>Телефон власника</th>-->
+
     </tr>
     <tr th:each="book : ${books}">
         <td><span th:text="${book.id}"></span></td>
         <td><span th:text="${book.name}"></span></td>
         <td><span th:text="${book.author}"></span></td>
-<!--        <td><span th:text="${book.user.getId()}"></span></td>-->
-<!--        <td><span th:text="${book.user.getPhone()}"></span></td>-->
+
     </tr>
 </table>
 </div>

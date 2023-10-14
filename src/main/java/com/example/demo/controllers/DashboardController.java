@@ -35,10 +35,4 @@ public class DashboardController {
             return "redirect:/error";
         }
     }
-
-    @PostMapping("/add-book")
-    public String saveBook(@ModelAttribute("book") Book book) {
-        bookService.saveBook(book);
-        return "redirect:/dashboard";
-    }
 }

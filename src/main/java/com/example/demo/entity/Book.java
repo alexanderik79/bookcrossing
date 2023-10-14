@@ -21,8 +21,8 @@ public class Book {
     private String name;
     @Column(name = "author")
     private String author;
-    @Column(name = "jenre")
-    private String jenre;
+    @Column(name = "genre")
+    private String genre;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

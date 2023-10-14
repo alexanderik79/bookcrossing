@@ -11,7 +11,7 @@
 <div class="container">
     <h3>Додати книгу</h3>
 
-    <form action="#" th:action="@{/newbook}" th:object="${book}" method="post">
+    <form action="#" th:action="@{/newbooks}" th:object="${book}" method="post">
         <div class="form-group">
             <label for="name">Назва:</label>
             <input type="text" th:field="*{name}" id="name" placeholder="Name" required>
@@ -20,20 +20,26 @@
             <label for="author">Автор:</label>
             <input type="text" th:field="*{author}" id="author" placeholder="Author" required>
         </div>
-
-<!--этот блок-->
-<!--        <div class="form-group">-->
-<!--            <label for="genre">Жанр:</label>-->
-<!--            <select id="genre" name="genre" th:field="*{genre}" required>-->
-<!--                <option th:value="Фантастика" th:text= "Фантастика"></option>-->
-<!--                <option th:value="Детектив" th:text= "Детектив"></option>-->
-<!--                <option th:value="Пригоди" th:text= "Пригоди"></option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--конец блока-->
-
-
+        <div class="form-group">
+            <label for="genre">Жанр:</label>
+            <select id="genre" name="genre" th:field="*{genre}" required>
+                <option th:value="Фантастика" th:text= "Фантастика"></option>
+                <option th:value="Детектив" th:text= "Детектив"></option>
+                <option th:value="Пригоди" th:text= "Пригоди"></option>
+            </select>
+        </div>
         <button type="submit" class="button">Додати</button>
+
+
+
+<!--        <div class="container2">-->
+<!--            <a>id : <span th:text="${user.id}"></span></a>-->
+<!--            <a>Ім'я : <span th:text="${user.name}"></span></a>-->
+<!--            <a>Email : <span th:text="${user.email}"></span></a>-->
+<!--            <a>Телефон : <span th:text="${user.phone}"></span></a>-->
+<!--            <a>Місто : <span th:text="${user.city}"></span></a>-->
+<!--        </div>-->
+
     </form>
 </div>
 </body>

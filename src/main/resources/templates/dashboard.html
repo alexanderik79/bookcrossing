@@ -11,7 +11,7 @@
           <a th:href="@{/my-books(user_id=${user.id})}" class="button">Список моїх книжок</a>
           <a href="/books" class="button">Бібліотека</a>
           <a href="/my-requests" class="button">Список запросів моїх книжок</a><br>
-          <a href="/newbook" class="button">Добавити книжку</a><br>
+          <a th:href="@{/newbooks(id=${user.id})}" class="button">Додати книжку</a><br>
     </div>
 </div>
     <div class="container2">

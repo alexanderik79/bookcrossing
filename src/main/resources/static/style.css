@@ -55,7 +55,6 @@ body {
     margin-bottom: 10px; /* Добавление отступа сверху, если нужно */
 }
 
-
 .button:hover {
     background-color: #0056b3;
 }
@@ -64,5 +63,15 @@ input[type="tel"], input[type="city"] {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 260px;
+    width: 30%;
 }
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 32%;
+}
+label {
+           display: block;
+           margin-bottom: 5px;
+       }
