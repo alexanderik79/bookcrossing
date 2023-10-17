@@ -2,8 +2,8 @@ package com.example.demo.controllers;
 
 import com.example.demo.entity.Book;
 import com.example.demo.repository.BookRepository;
-import com.example.demo.services.AdminService;
 import com.example.demo.services.BookService;
+import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,21 +14,22 @@ import java.util.List;
 
 @Controller
 public class BookPageController {
-    private final AdminService adminService;
+
     private final BookService bookService;
+    private final UserService userService;
 
     private final BookRepository bookRepository;
 
     @Autowired
-    public BookPageController(AdminService adminService, BookService bookService, BookRepository bookRepository) {
-        this.adminService = adminService;
+    public BookPageController(BookService bookService, UserService userService, BookRepository bookRepository) {
         this.bookService = bookService;
+        this.userService = userService;
         this.bookRepository = bookRepository;
     }
 
     @GetMapping("/books")
     public String getAllBooks(Model model) {
-        List<Book> listOfBooks = adminService.getALLbooks();
+        List<Book> listOfBooks = userService.getALLbooks();
         model.addAttribute("book", listOfBooks);
         return "books";
     }
@@ -69,8 +70,8 @@ public class BookPageController {
 
     @GetMapping("/books/{id}")
     public ResponseEntity getBookByID(@PathVariable Long id) {
-        if (!adminService.getBookByID(id).isEmpty()) {
-            return ResponseEntity.ok(adminService.getBookByID(id));
+        if (!userService.getBookByID(id).isEmpty()) {
+            return ResponseEntity.ok(userService.getBookByID(id));
         } else {
             return  ResponseEntity.notFound().build();
         }
@@ -78,12 +79,12 @@ public class BookPageController {
 
     @DeleteMapping("/books/{id}")
     public void deleteBookByID(@PathVariable Long id){
-        adminService.deleteBookByID(id) ;
+        userService.deleteBookByID(id) ;
     }
 
     @PutMapping("/books")
     public Book update(@RequestBody Book book){
-        adminService.saveOrUpdateBook(book);
+        userService.saveOrUpdateBook(book);
         return book;
     }
 
