@@ -29,11 +29,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.csrf(AbstractHttpConfigurer::disable).
-                formLogin(login -> login.loginPage("/login")
+        httpSecurity.csrf(AbstractHttpConfigurer::disable)
+                       .formLogin(login -> login.loginPage("/login")
                         .loginProcessingUrl("/login")
-
                         .defaultSuccessUrl("/dashboard", true)
+                               .failureForwardUrl("/failurelogin")
                         .permitAll())
                 .authorizeHttpRequests(req -> req.requestMatchers("/login", "/register").permitAll()
                         .requestMatchers("/adminpage", "/books").hasAuthority("ROLE_ADMIN")

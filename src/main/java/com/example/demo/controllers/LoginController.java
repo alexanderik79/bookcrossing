@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class LoginController {
 
+    private final AuthenticationManager authenticationManager;
 
+    public LoginController(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
 
     @GetMapping("/login")
@@ -19,5 +23,12 @@ public class LoginController {
         return "login";
     }
 
+   /* @PostMapping("/login")
+    public String permitLogin(@RequestParam("login") String username,
+                              @RequestParam("password") String password){
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
+        return "index";
 
+    }
+*/
 }
