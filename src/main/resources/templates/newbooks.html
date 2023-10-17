@@ -12,6 +12,8 @@
     <h3>Додати книгу</h3>
 
     <form action="#" th:action="@{/newbooks}" th:object="${book}" method="post">
+<!--        <input type="hidden" name="user_id" th:value="${user.id}" />-->
+
         <div class="form-group">
             <label for="name">Назва:</label>
             <input type="text" th:field="*{name}" id="name" placeholder="Name" required>
@@ -30,17 +32,15 @@
         </div>
         <button type="submit" class="button">Додати</button>
 
-
-
-<!--        <div class="container2">-->
-<!--            <a>id : <span th:text="${user.id}"></span></a>-->
-<!--            <a>Ім'я : <span th:text="${user.name}"></span></a>-->
-<!--            <a>Email : <span th:text="${user.email}"></span></a>-->
-<!--            <a>Телефон : <span th:text="${user.phone}"></span></a>-->
-<!--            <a>Місто : <span th:text="${user.city}"></span></a>-->
-<!--        </div>-->
-
     </form>
+
+    <div class="container2">
+        <a>id : <span th:text="${user.id}"></span></a>
+        <a>Ім'я : <span th:text="${user.name}"></span></a>
+        <a>Email : <span th:text="${user.email}"></span></a>
+        <a>Телефон : <span th:text="${user.phone}"></span></a>
+        <a>Місто : <span th:text="${user.city}"></span></a>
+    </div>
 </div>
 </body>
 </html>

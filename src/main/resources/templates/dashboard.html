@@ -8,10 +8,13 @@
 </head>
 <body>
     <div class="container">
-          <a th:href="@{/my-books(user_id=${user.id})}" class="button">Список моїх книжок</a>
+        <h3>Особистий кабінет</h3>
+<!--          <a th:href="@{/mybooks(user_id=${user.id})}" class="button">Список моїх книжок</a>-->
+          <a href="/mybooks" class="button">Список моїх книжок</a>
           <a href="/books" class="button">Бібліотека</a>
-          <a href="/my-requests" class="button">Список запросів моїх книжок</a><br>
-          <a th:href="@{/newbooks(id=${user.id})}" class="button">Додати книжку</a><br>
+<!--          <a href="/my-requests" class="button">Список запросів моїх книжок</a><br>-->
+<!--          <a th:href="@{/newbooks(user_id=${user.id})}" class="button">Додати книжку</a><br>-->
+          <a href="/newbooks" class="button">Додати книжку</a><br>
     </div>
 </div>
     <div class="container2">

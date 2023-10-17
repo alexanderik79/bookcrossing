@@ -1,89 +1,70 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entity.Book;
-import com.example.demo.repository.BookRepository;
-import com.example.demo.services.AdminService;
+
+import com.example.demo.entity.User;
 import com.example.demo.services.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.services.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+import java.util.List;
 
 @Controller
 public class BooksController {
-    private final AdminService adminService;
     private final BookService bookService;
-    private final BookRepository bookRepository;
+    private final UserService userService;
 
-    @Autowired
-    public BooksController(AdminService adminService, BookService bookService, BookRepository bookRepository) {
-        this.adminService = adminService;
+    public BooksController(BookService bookService, UserService userService) {
         this.bookService = bookService;
-        this.bookRepository = bookRepository;
+        this.userService = userService;
     }
-
     @GetMapping("/books")
-    public String getAllBooks(Model model) {
+    public String getLibrary(Model model) {
         List<Book> listOfBooks = bookService.getAllBooks();
         model.addAttribute("books", listOfBooks);
         return "books";
     }
-
-    //Антон
-    @GetMapping("/newBook")
+    @GetMapping("/mybooks")
+    public String myBooks(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Long userId = userService.getUserByLogin(username).getId();
+        System.out.println("!!!!!!!!!!!!!!!"+userId);
+        List<Book> listOfBooks = bookService.findByUserId(userId);
+        model.addAttribute("books", listOfBooks);
+        return "mybooks";
+    }
+    @GetMapping("/newbooks")
     public String showAddBookForm(Model model) {
-        // Логика отображения формы для создания новой книги
-        return "newbooks"; // Возвращает имя представления для формы
+        model.addAttribute("book", new Book());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userService.getUserByLogin(username);
+        model.addAttribute("user", user);
+        return "newbooks";
     }
-
-    @ModelAttribute("newBook")
-    public Book getNewBook() {
-        return new Book();
+    @PostMapping("/newbooks")
+    public String addNewBook(Book book) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Long userId = userService.getUserByLogin(username).getId();
+        book.setUser(userService.getUserById(userId));
+        bookService.saveBook(book);
+        return "redirect:/mybooks";
     }
-
-    //Антон
-    @GetMapping("/user-books")
-    public String getUserBooks(Model model) {
-        // Получаем список книг из базы данных
-        List<Book> userBooks = bookRepository.findAll();
-        // Передаем список книг в модель
-        model.addAttribute("userBooks", userBooks);
-
-        return "user-books";
-    }
-
-    //Антон
-    @PostMapping("/newBook")
-    public String addBook(@ModelAttribute("newBook") Book newBook) {
-        // Сохранить новую книгу в базу данных
-        bookRepository.save(newBook);
-
-        // Перенаправить пользователя на страницу, где можно увидеть добавленную книгу
-        return "redirect:/user-books";
-    }
-
-    @GetMapping("/books/{id}")
-    public ResponseEntity getBookByID(@PathVariable Long id) {
-        if (!adminService.getBookByID(id).isEmpty()) {
-            return ResponseEntity.ok(adminService.getBookByID(id));
+    @GetMapping("/owner")
+    public String dashboardPage(@RequestParam("id") Long id, Model model) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            model.addAttribute("user", user);
+            return "owner";
         } else {
-            return  ResponseEntity.notFound().build();
+            return "redirect:/error";
         }
     }
-
-    @DeleteMapping("/books/{id}")
-    public void deleteBookByID(@PathVariable Long id){
-        adminService.deleteBookByID(id) ;
-    }
-
-    @PutMapping("/books")
-    public Book update(@RequestBody Book book){
-        adminService.saveOrUpdateBook(book);
-        return book;
-    }
-
 }

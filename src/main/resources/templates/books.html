@@ -9,6 +9,7 @@
 <body>
 <div class="container">
 <table>
+    <h3>Бібліотека</h3>
     <tr>
         <th>№</th>
         <th>Назва</th>
@@ -25,7 +26,7 @@
         <td><span th:text="${book.author}"></span></td>
         <td><span th:text="${book.user.getId()}"></span></td>
 <!--        <td><span th:text="${book.user.getPhone()}"></span></td>-->
-        <td><a th:href="@{/user(id=${book.user.getId()})}" class="href">Власник</a></td>
+        <td><a th:href="@{/owner(id=${book.user.getId()})}" class="href">Власник</a></td>
     </tr>
 </table>
 </div>
