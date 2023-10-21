@@ -29,10 +29,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(login -> login.loginPage("/login")
-                .defaultSuccessUrl("/dashboard", true))
+                .defaultSuccessUrl("/dashboard"))
                 .authorizeHttpRequests(autorize -> autorize
                         .requestMatchers("/login", "/register", "/style.css").permitAll()
-                        .requestMatchers("/adminpage").hasAuthority("ADMIN")
+                        .requestMatchers("/adminpage/**").hasAuthority("ADMIN")
                         .requestMatchers("/**").authenticated()
                 );
         return http.build();

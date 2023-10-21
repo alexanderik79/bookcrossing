@@ -5,6 +5,7 @@ import com.example.demo.entity.Book;
 import com.example.demo.entity.User;
 import com.example.demo.services.BookService;
 import com.example.demo.services.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -69,23 +70,6 @@ public class BooksController {
         }
     }
 
-    @GetMapping("/books/{id}")
-    public ResponseEntity getBookByID(@PathVariable Long id) {
-        if (bookService.getBookById(id).isPresent()) {
-            return ResponseEntity.ok(bookService.getBookById(id));
-        } else {
-            return  ResponseEntity.notFound().build();
-        }
-    }
 
-    @DeleteMapping("/books/{id}")
-    public void deleteBookByID(@PathVariable Long id){
-        bookService.deleteBookByID(id); ;
-    }
 
-    @PutMapping("/books")
-    public Book update(@RequestBody Book book){
-        bookService.saveOrUpdateBook(book);
-        return book;
-    }
 }

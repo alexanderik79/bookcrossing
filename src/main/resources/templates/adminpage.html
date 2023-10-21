@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>AdminPage</title>
 </head>
 <body>
+
+<form action="#" th:action="@{/adminpage/delete/users}" th:object="${user}" method="delete">
+    <!--        <input type="hidden" name="user_id" th:value="${user.id}" />-->
+
+    <div class="form-group">
+        <label for="id">ID юзера який треба видалити:</label>
+        <input type="text" th:field="*{id}" id="id" placeholder="id" required>
+        <button type="submit" class="button">Видалити</button>
+    </div>
+
+</form>
+
+<div>
+    <a href="adminpage/users">
+        Посилання на список юзерів у системі
+    </a>
+</div>
+
+<div>
+    <a href="adminpage/books">
+        Посилання на список всіх книг у системі
+    </a>
+</div>
 
 </body>
 </html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список Юзерів</title>
+</head>
+<body>
+
+<div class="container">
+    <table>
+        <h3>Список юзерів</h3>
+        <tr>
+            <th>Логін</th>
+            <th>Імя</th>
+            <th>Пошта</th>
+            <th>Телефон</th>
+            <th>Місто</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.username}"></span></td>
+            <td><span th:text="${user.name}"></span></td>
+            <td><span th:text="${user.email}"></span></td>
+            <td><span th:text="${user.phone}"></span></td>
+            <td><span th:text="${user.city}"></span></td>
+        </tr>
+    </table>
+
+</body>
+</html>
