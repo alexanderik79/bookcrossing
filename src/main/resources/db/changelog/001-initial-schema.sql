@@ -1,0 +1,32 @@
+-- liquibase formatted sql
+--
+-- changeset Ignat:1 runOnChange:true
+--
+-- CREATE TABLE users (
+--                        id SERIAL PRIMARY KEY,
+--                        username VARCHAR(255) NOT NULL,
+--                        password VARCHAR(255) NOT NULL,
+--                        name VARCHAR(255),
+--                        email VARCHAR(255),
+--                        phone VARCHAR(255),
+--                        city VARCHAR(255),
+--                        role_id INT,
+--                        FOREIGN KEY (role_id) REFERENCES roles (id)
+-- );
+--
+-- CREATE TABLE books (
+--                        id SERIAL PRIMARY KEY,
+--                        name VARCHAR(255) NOT NULL,
+--                        author VARCHAR(255),
+--                        genre VARCHAR(255),
+--                        user_id INT,
+--                        FOREIGN KEY (user_id) REFERENCES users (id)
+-- );
+--
+-- CREATE TABLE roles (
+--                        id SERIAL PRIMARY KEY,
+--                        role_name VARCHAR(255) NOT NULL
+-- );
+
+-- INSERT INTO roles (role_name) VALUES ('ADMIN');
+-- INSERT INTO roles (role_name) VALUES ('USER');

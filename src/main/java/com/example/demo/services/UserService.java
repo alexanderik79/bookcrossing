@@ -31,4 +31,9 @@ public class UserService {
         System.out.println("UserService"+userRepository.findByUsername(username));
         return userRepository.findByUsername(username);
     }
+
+    public boolean usernameExists(String username) {
+        User user = userRepository.findByUsername(username);
+        return user != null;
+    }
 }
