@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/dashboard", true))
                 .authorizeHttpRequests(autorize -> autorize
                         .requestMatchers("/login", "/register", "/style.css").permitAll()
+                        .requestMatchers("/adminpage").hasAuthority("ADMIN")
                         .requestMatchers("/**").authenticated()
                 );
         return http.build();
