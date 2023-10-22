@@ -6,8 +6,7 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/adminpage/delete/users}" th:object="${user}" method="delete">
-    <!--        <input type="hidden" name="user_id" th:value="${user.id}" />-->
+<form action="#" th:action="@{/adminpage/delete/users}" th:object="${user}" th:method="delete">
 
     <div class="form-group">
         <label for="id">ID юзера який треба видалити:</label>

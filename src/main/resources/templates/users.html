@@ -10,6 +10,7 @@
     <table>
         <h3>Список юзерів</h3>
         <tr>
+            <th>ID</th>
             <th>Логін</th>
             <th>Імя</th>
             <th>Пошта</th>
@@ -17,13 +18,21 @@
             <th>Місто</th>
         </tr>
         <tr th:each="user : ${users}">
+            <td><span th:text="${user.id}"></span></td>
+            <td><span th:text="${user.name}"></span></td>
             <td><span th:text="${user.username}"></span></td>
             <td><span th:text="${user.name}"></span></td>
             <td><span th:text="${user.email}"></span></td>
             <td><span th:text="${user.phone}"></span></td>
             <td><span th:text="${user.city}"></span></td>
+            <td>
+                <form action="#" th:action="@{/adminpage/delete/users}" th:value="*{user.getId()}" th:method="delete">
+                    <input type="hidden" th:value="*{user.getId()}" id="id" >
+                    <button type="submit" class="button">Видалити</button>
+                </form>
+            </td>
         </tr>
     </table>
-
+</div>
 </body>
 </html>
