@@ -31,27 +31,29 @@ public class AdminPageController {
         return "adminpage";
     }
 
-    @DeleteMapping("/adminpage/delete/books/")
-    public String deleteBookByID(@PathVariable Long id){
-        bookService.deleteBookByID(id);
-        return "books";
-    }
 
     @PutMapping("/adminpage/update/books")
-    public String  updateBook(@RequestBody Book book){
+    public String updateBook(@RequestBody Book book) {
         bookService.saveOrUpdateBook(book);
         return "books";
     }
 
     @PutMapping("/adminpage/update/users")
-    public String updateUser(@RequestBody User user){
+    public String updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return "users";
     }
-    @DeleteMapping("/adminpage/delete/users/")
-    public String deleteUserByID(@PathVariable Long id){
+
+    @DeleteMapping("/adminpage/delete/users")
+    public String deleteUserByID(@PathVariable Long id) {
         userService.deleteUserByID(id);
         return "users";
+    }
+
+    @DeleteMapping("/adminpage/delete/books")
+    public String deleteBookByID(@PathVariable Long id) {
+        bookService.deleteBookByID(id);
+        return "books";
     }
 
     @GetMapping("/adminpage/books")
