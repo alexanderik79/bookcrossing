@@ -32,20 +32,21 @@ public class AdminPageController {
     }
 
     @DeleteMapping("/adminpage/delete/books/")
-    public void deleteBookByID(@PathVariable Long id){
-        bookService.deleteBookByID(id); ;
+    public String deleteBookByID(@PathVariable Long id){
+        bookService.deleteBookByID(id);
+        return "books";
     }
 
     @PutMapping("/adminpage/update/books")
-    public Book updateBook(@RequestBody Book book){
+    public String  updateBook(@RequestBody Book book){
         bookService.saveOrUpdateBook(book);
-        return book;
+        return "books";
     }
 
     @PutMapping("/adminpage/update/users")
-    public User updateUser(@RequestBody User user){
+    public String updateUser(@RequestBody User user){
         userService.updateUser(user);
-        return user;
+        return "users";
     }
     @DeleteMapping("/adminpage/delete/users/")
     public String deleteUserByID(@PathVariable Long id){
