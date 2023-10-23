@@ -26,10 +26,7 @@
             <td><span th:text="${user.phone}"></span></td>
             <td><span th:text="${user.city}"></span></td>
             <td>
-                <form action="#" th:action="@{/adminpage/delete/users}" th:value="*{user.getId()}" th:method="delete">
-                    <input type="hidden" th:value="*{user.getId()}" id="id" >
-                    <button type="submit" class="button">Видалити</button>
-                </form>
+
             </td>
         </tr>
     </table>

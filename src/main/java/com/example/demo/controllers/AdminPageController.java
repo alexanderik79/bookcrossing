@@ -44,16 +44,16 @@ public class AdminPageController {
         return "users";
     }
 
-    @DeleteMapping("/adminpage/delete/users")
+    @PostMapping("/adminpage/delete/users/")
     public String deleteUserByID(@RequestParam Long id) {
         userService.deleteUserByID(id);
         return "redirect:/adminpage/users";
     }
 
-    @DeleteMapping("/adminpage/delete/books")
-    public String deleteBookByID(@RequestParam Long id) {
+    @PostMapping("/adminpage/delete/books{id}")
+    public String deleteBookByID(@PathVariable Long id) {
         bookService.deleteBookByID(id);
-        return "books";
+        return "redirect:/adminpage/books";
     }
 
     @GetMapping("/adminpage/books")
