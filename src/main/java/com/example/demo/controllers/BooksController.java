@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.Book;
 
 import com.example.demo.entity.User;
@@ -39,15 +40,26 @@ public class BooksController {
         model.addAttribute("books", listOfBooks);
         return "mybooks";
     }
+//    @GetMapping("/newbooks")
+//    public String showAddBookForm(Model model) {
+//        model.addAttribute("book", new Book());
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+//        User user = userService.getUserByLogin(username);
+//        model.addAttribute("user", user);
+//        return "newbooks";
+//    }
+
     @GetMapping("/newbooks")
     public String showAddBookForm(Model model) {
         model.addAttribute("book", new Book());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        User user = userService.getUserByLogin(username);
+        UserDTO user = userService.getUserByLogin(username);
         model.addAttribute("user", user);
         return "newbooks";
     }
+
     @PostMapping("/newbooks")
     public String addNewBook(Book book) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

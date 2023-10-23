@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.Book;
 import com.example.demo.entity.User;
 import com.example.demo.services.BookService;
@@ -26,11 +27,20 @@ public class DashboardController {
         this.bookService = bookService;
     }
 
+//    @GetMapping("/dashboard")
+//    public String dashboard(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+//        User user = userService.getUserByLogin(username);
+//        model.addAttribute("user", user);
+//        return "dashboard";
+//    }
+
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        User user = userService.getUserByLogin(username);
+        UserDTO user = userService.getUserByLogin(username);
         model.addAttribute("user", user);
         return "dashboard";
     }
