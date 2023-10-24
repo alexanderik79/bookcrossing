@@ -8,27 +8,32 @@
 </head>
 <body>
 <div class="container">
-<table>
-    <h3>Бібліотека</h3>
-    <tr>
-        <th>№</th>
-        <th>Назва</th>
-        <th>Жанр</th>
-        <th>Автор</th>
-        <th>id власника</th>
-<!--        <th>Телефон власника</th>-->
-        <th>Власник</th>
-    </tr>
-    <tr th:each="book : ${books}">
-        <td><span th:text="${book.id}"></span></td>
-        <td><span th:text="${book.name}"></span></td>
-        <td><span th:text="${book.genre}"></span></td>
-        <td><span th:text="${book.author}"></span></td>
-        <td><span th:text="${book.user.getId()}"></span></td>
-<!--        <td><span th:text="${book.user.getPhone()}"></span></td>-->
-        <td><a th:href="@{/owner(id=${book.user.getId()})}" class="href">Власник</a></td>
-    </tr>
-</table>
+    <table>
+        <h3>Бібліотека</h3>
+        <tr>
+            <th>№</th>
+            <th>Назва</th>
+            <th>Жанр</th>
+            <th>Автор</th>
+            <th>id власника</th>
+            <!--        <th>Телефон власника</th>-->
+            <th>Власник</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td><span th:text="${book.id}"></span></td>
+            <td><span th:text="${book.name}"></span></td>
+            <td><span th:text="${book.genre}"></span></td>
+            <td><span th:text="${book.author}"></span></td>
+            <td><span th:text="${book.user.getId()}"></span></td>
+            <!--        <td><span th:text="${book.user.getPhone()}"></span></td>-->
+            <td><a th:href="@{/owner(id=${book.user.getId()})}" class="href">Власник</a></td>
+            <td>
+                <form th:method="POST" th:action="@{/adminpage/delete/books{id}(id=${book.getId()})}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

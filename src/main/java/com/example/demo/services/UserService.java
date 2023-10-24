@@ -53,4 +53,16 @@ public class UserService {
         User user = userRepository.findByUsername(username);
         return user != null;
     }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
+    public void deleteUserByID(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
 }
