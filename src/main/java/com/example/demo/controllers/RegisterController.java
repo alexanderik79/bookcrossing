@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegisterController {
     private final UserService userService;
-    private final BCryptPasswordEncoder passwordEncoder;
     @Autowired
-    public RegisterController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+    public RegisterController(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
@@ -28,21 +26,20 @@ public class RegisterController {
         return "register";
     }
 
+
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute("user") @Valid User user,
-                           BindingResult bindingResult) {
+    public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (userService.usernameExists(user.getUsername())) {
+            bindingResult.rejectValue("username", "error.user", "This username already exists");
+            return "register";
+        }
+
         if (bindingResult.hasErrors()) {
             return "register";
-        } else {
-            if (userService.usernameExists(user.getUsername())) {
-                bindingResult.rejectValue("username", "error.user", "This username already exists");
-                return "register";
-            } else {
-                String encodedPassword = passwordEncoder.encode(user.getPassword());
-                user.setPassword(encodedPassword);
-                userService.saveUser(user);
-                return "redirect:/login";
-            }
         }
+
+        userService.processRegistration(user);
+        return "redirect:/login";
     }
+
 }

@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.Book;
 import com.example.demo.entity.Role;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public class UserDTO {
     String city;
     List<Book> books;
     Role role;
+
 }

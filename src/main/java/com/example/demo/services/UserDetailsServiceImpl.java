@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import com.example.demo.dto.UserDTO;
+
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
         System.out.println(user.getName());
 
         if (user == null) {

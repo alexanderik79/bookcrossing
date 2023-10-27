@@ -6,6 +6,7 @@ import com.example.demo.entity.User;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.utils.UserDTOMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,31 +16,29 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-
     private final UserDTOMapper userDTOMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, UserDTOMapper userDTOMapper) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, UserDTOMapper userDTOMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userDTOMapper = userDTOMapper;
+        this.passwordEncoder = passwordEncoder;
     }
-    public User saveUser (User user){
+
+    public User saveUser(User user) {
         System.out.println(user);
         Role userRole = roleRepository.findByName("USER");
         user.setRole(userRole);
         return userRepository.save(user);
     }
 
-    public User getUserById (long id){
-        return userRepository.getOne(id);
+    public UserDTO getUserById(long id) {
+        return userDTOMapper.mapToProductDto(userRepository.getReferenceById(id));
     }
 
-//    public User getUserByLogin (String username){
-//        System.out.println("UserService"+userRepository.findByUsername(username));
-//        return userRepository.findByUsername(username);
-//    }
 
-    public UserDTO getUserByLogin(String username){
+    public UserDTO getUserByLogin(String username) {
         return userDTOMapper.mapToProductDto(userRepository.findByUsername(username));
     }
 
@@ -49,10 +48,26 @@ public class UserService {
                 .collect(Collectors.toList()); //превратили стрим обратно в коллекцию, а точнее в лист
     }
 
-    public boolean usernameExists(String username) {
-        User user = userRepository.findByUsername(username);
-        return user != null;
+
+    public void processRegistration(User user) {
+        if (!usernameExists(user.getUsername())) {
+            encodeAndSaveUser(user);
+        }
     }
+
+    public boolean usernameExists(String username) {
+        User existingUser = userRepository.findByUsername(username);
+        return existingUser != null;
+    }
+
+    public void encodeAndSaveUser(User user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        Role userRole = roleRepository.findByName("USER");
+        user.setRole(userRole);
+        userRepository.save(user);
+    }
+
 
     public void updateUser(User user) {
         userRepository.save(user);
@@ -62,7 +77,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 }

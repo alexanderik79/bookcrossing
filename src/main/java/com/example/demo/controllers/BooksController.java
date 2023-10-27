@@ -1,11 +1,13 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dto.BookDTO;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.Book;
 
 import com.example.demo.entity.User;
 import com.example.demo.services.BookService;
 import com.example.demo.services.UserService;
+import com.example.demo.utils.UserDTOMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,36 +21,31 @@ import java.util.List;
 public class BooksController {
     private final BookService bookService;
     private final UserService userService;
+    private final UserDTOMapper userDTOMapper;
 
-    public BooksController(BookService bookService, UserService userService) {
+    public BooksController(BookService bookService, UserService userService, UserDTOMapper userDTOMapper) {
         this.bookService = bookService;
         this.userService = userService;
+        this.userDTOMapper = userDTOMapper;
     }
+
+
     @GetMapping("/books")
     public String getLibrary(Model model) {
-        List<Book> listOfBooks = bookService.getAllBooks();
+        List<BookDTO> listOfBooks = bookService.getAllBooks();
         model.addAttribute("books", listOfBooks);
         return "books";
     }
+
     @GetMapping("/mybooks")
     public String myBooks(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        Long userId = userService.getUserByLogin(username).getId();
-        System.out.println("!!!!!!!!!!!!!!!"+userId);
-        List<Book> listOfBooks = bookService.findByUserId(userId);
+        UserDTO user = userService.getUserByLogin(username);
+        List<BookDTO> listOfBooks = bookService.findByUserId(user.getId());
         model.addAttribute("books", listOfBooks);
         return "mybooks";
     }
-//    @GetMapping("/newbooks")
-//    public String showAddBookForm(Model model) {
-//        model.addAttribute("book", new Book());
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String username = authentication.getName();
-//        User user = userService.getUserByLogin(username);
-//        model.addAttribute("user", user);
-//        return "newbooks";
-//    }
 
     @GetMapping("/newbooks")
     public String showAddBookForm(Model model) {
@@ -60,18 +57,21 @@ public class BooksController {
         return "newbooks";
     }
 
+
     @PostMapping("/newbooks")
-    public String addNewBook(Book book) {
+    public String addNewBook(BookDTO book) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        Long userId = userService.getUserByLogin(username).getId();
-        book.setUser(userService.getUserById(userId));
+        UserDTO userDTO = userService.getUserByLogin(username);
+        User user = userDTOMapper.mapToProductEntity(userDTO);
+        book.setUser(user);
         bookService.saveBook(book);
         return "redirect:/mybooks";
     }
+
     @GetMapping("/owner")
     public String dashboardPage(@RequestParam("id") Long id, Model model) {
-        User user = userService.getUserById(id);
+        UserDTO user = userService.getUserById(id);
         if (user != null) {
             model.addAttribute("user", user);
             return "owner";
